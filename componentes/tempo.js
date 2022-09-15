@@ -1,20 +1,23 @@
-import React from "react";
-import { Text } from "react-native-web";
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
 
-export default function tempo(){
-    return (
-        <>
-       <Text>Min: </Text>
-       <Text>Max: </Text>
-       <Text>Descrição: </Text>
-        </>
+export default function components() {
+ return (
+   <>
+        <Text style={styles.titulo}>Dados do Tempo</Text>
+        <Text style={styles.texto}>Máx: </Text>
+        <Text style={styles.texto}>Mín: </Text>
+        <Text style={styles.texto}>Descrição: </Text>
 
-    );
+   </>
+  );
 }
 
 const styles = StyleSheet.create({
-    texto: {
-        fontSize: 20,
-        marginTop: 10,
+    titulo:{
+        fontSize:25
     },
-});
+    texto:{
+        fontSize:20
+    }
+})
