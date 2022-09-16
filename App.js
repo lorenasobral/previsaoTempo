@@ -1,16 +1,16 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
-import Tempo from './componentes/Tempo';
+import Tempo from './componentes/tempo';
 
 import Api from  './componentes/Api';
 
 export default function App() {
-  const [cidade, setCidade] = useState("itu");
+  const [cidade, setCidade] = useState("São Paulo");
   const [dados, setDados] = useState("");
 
-  async function climacidade(){
-    const response = await Api.get(`weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,description&key=5aa056e9&city_name=${cidade},SP`);
-    setDados(response.data.forecast[0]);
+  async function climacep(){
+    const response = await Api.get(`weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,description&key=4c6ff9f2&city_name=${cidade},SP`);
+    setDados(response.data);
   }
   return (
     <View style={styles.container}>
@@ -26,12 +26,16 @@ export default function App() {
         />
       </View>
       <View style={styles.blocoGeral}>
-        <TouchableOpacity style={styles.botao} onPress={buscaCep}>
+        <TouchableOpacity style={styles.botao} onPress={climacep}>
           <Text style={styles.textoBotao}>Buscar</Text>
         </TouchableOpacity>
       </View>
       <Tempo data={dados}/>
     </View>
+
+
+
+
   );
 }
 
