@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import Tempo from './componentes/tempo';
 
 import Api from  './componentes/Api';
@@ -8,9 +8,9 @@ export default function App() {
   const [cidade, setCidade] = useState("São Paulo");
   const [dados, setDados] = useState("");
 
-  async function climacep(){
-    const response = await Api.get(`weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,description&key=4c6ff9f2&city_name=${cidade},SP`);
-    setDados(response.data);
+  async function previsao(){
+    const response = await Api.get(`weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,description&key=0d3f5225&city_name=${cidade},SP`);
+    setDados(response.data.forecast);
   }
   return (
     <View style={styles.container}>
@@ -26,11 +26,24 @@ export default function App() {
         />
       </View>
       <View style={styles.blocoGeral}>
-        <TouchableOpacity style={styles.botao} onPress={climacep}>
+        <TouchableOpacity style={styles.botao} onPress={previsao}>
           <Text style={styles.textoBotao}>Buscar</Text>
         </TouchableOpacity>
       </View>
-      <Tempo data={dados}/>
+      <FlatList
+          data={dados}
+          renderItem={({item}) => {
+            return (
+              <View >
+                <Text>Data: {item.date}</Text>
+                <Text>Max: {item.max}</Text>
+                <Text>Min: {item.min}</Text>
+                <Text>Min: {item.description}</Text>
+              </View>
+            );
+          }}
+
+        />
     </View>
 
 
