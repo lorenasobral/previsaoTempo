@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-export default function components() {
+export default function components(props) {
+    let data = props.data;
  return (
    <>
         <Text style={styles.titulo}>Dados do Tempo</Text>
-        <Text style={styles.texto}>Máx: </Text>
-        <Text style={styles.texto}>Mín: </Text>
-        <Text style={styles.texto}>Descrição: </Text>
+        <Text style={styles.texto}>Cidade: {data.city_name}</Text>
+        <Text style={styles.texto}>Descrição: {data.description}</Text>
+        <Text style={styles.texto}>Temperatura: {data.temp}°C</Text>
 
    </>
   );
